@@ -1,2 +1,2 @@
 # VSIXTorqueScript
-Visual Studio extension for Turque script
+Visual Studio extension for Torque script

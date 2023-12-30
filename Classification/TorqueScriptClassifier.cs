@@ -4,11 +4,14 @@ namespace TorqueScriptLanguage
 	using System;
 	using System.Collections.Generic;
 	using System.ComponentModel.Composition;
+	using System.Diagnostics;
 	using Microsoft.VisualStudio.Text;
 	using Microsoft.VisualStudio.Text.Classification;
 	using Microsoft.VisualStudio.Text.Editor;
 	using Microsoft.VisualStudio.Text.Tagging;
 	using Microsoft.VisualStudio.Utilities;
+	using Microsoft.VisualStudio.Language.StandardClassification;
+
 
 	[Export(typeof(ITaggerProvider))]
 	[ContentType("TorqueScript")]
@@ -53,10 +56,10 @@ namespace TorqueScriptLanguage
 			_buffer = buffer;
 			_aggregator = torqueScriptTagAggregator;
 			_torqueScriptTypes = new Dictionary<TorqueScriptTokenTypes, IClassificationType>();
-			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptFunction] = typeService.GetClassificationType("function");
-			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptNew] = typeService.GetClassificationType("new");
-			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptSingleton] = typeService.GetClassificationType("singleton");
-			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptDatablock] = typeService.GetClassificationType("datablock");
+			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptOperator] = typeService.GetClassificationType(PredefinedClassificationTypeNames.Operator);
+			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptComment] = typeService.GetClassificationType(PredefinedClassificationTypeNames.Comment);
+			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptQuoted] = typeService.GetClassificationType(PredefinedClassificationTypeNames.String);
+			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptKeyword] = typeService.GetClassificationType(PredefinedClassificationTypeNames.Keyword);// typeService.GetClassificationType("key_word");
 		}
 
 		public event EventHandler<SnapshotSpanEventArgs> TagsChanged

@@ -4,6 +4,8 @@ namespace TorqueScriptLanguage
 	using System;
 	using System.Collections.Generic;
 	using System.ComponentModel.Composition;
+	using System.Linq;
+	using System.Diagnostics;
 	using Microsoft.VisualStudio.Text;
 	using Microsoft.VisualStudio.Text.Classification;
 	using Microsoft.VisualStudio.Text.Editor;
@@ -34,18 +36,13 @@ namespace TorqueScriptLanguage
 
 	internal sealed class TorqueScriptTokenTagger : ITagger<TorqueScriptTokenTag>
 	{
-
-		ITextBuffer _buffer;
-		IDictionary<string, TorqueScriptTokenTypes> _torqueScriptTypes;
+		TorqueScriptLanguage _language;
+		int _lastSnapshotVersion = -1;
+		List<SnapshotSpan> _snapshotCommentsSpans = new List<SnapshotSpan>();
 
 		internal TorqueScriptTokenTagger(ITextBuffer buffer)
 		{
-			_buffer = buffer;
-			_torqueScriptTypes = new Dictionary<string, TorqueScriptTokenTypes>();
-			_torqueScriptTypes["function"] = TorqueScriptTokenTypes.TorqueScriptFunction;
-			_torqueScriptTypes["new"] = TorqueScriptTokenTypes.TorqueScriptNew;
-			_torqueScriptTypes["singleton"] = TorqueScriptTokenTypes.TorqueScriptSingleton;
-			_torqueScriptTypes["datablock"] = TorqueScriptTokenTypes.TorqueScriptDatablock;
+			_language = new TorqueScriptLanguage();
 		}
 
 		public event EventHandler<SnapshotSpanEventArgs> TagsChanged
@@ -53,25 +50,69 @@ namespace TorqueScriptLanguage
 			add { }
 			remove { }
 		}
-
+		private bool IsIntersectsWithComments(ITagSpan<TorqueScriptTokenTag> tag)
+		{
+			foreach (SnapshotSpan test in _snapshotCommentsSpans)
+			{
+				if(test.IntersectsWith(tag.Span))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 		public IEnumerable<ITagSpan<TorqueScriptTokenTag>> GetTags(NormalizedSnapshotSpanCollection spans)
 		{
-			foreach (SnapshotSpan curSpan in spans)
+			foreach (SnapshotSpan span in spans)
 			{
-				ITextSnapshotLine containingLine = curSpan.Start.GetContainingLine();
-				int curLoc = containingLine.Start.Position;
-				string[] tokens = containingLine.GetText().ToLower().Split(' ', '\t');
-				foreach (string torqueScriptToken in tokens)
+				//int lineNumber = span.Snapshot.GetLineNumberFromPosition(span.Start.Position);
+				//Debug.WriteLine(spans.ToString() + " " + lineNumber + " " + span.ToString());
+
+				int version = span.Snapshot.Version.VersionNumber;
+				if(version != _lastSnapshotVersion)
 				{
-					if (_torqueScriptTypes.ContainsKey(torqueScriptToken))
+					SnapshotSpan fullSnapshotSpan = new SnapshotSpan(span.Snapshot, new Span(0, span.Snapshot.Length));
+					var allComments = _language.findComments(fullSnapshotSpan);
+					_snapshotCommentsSpans.Clear();
+					foreach (ITagSpan<TorqueScriptTokenTag> comment in allComments)
 					{
-						var tokenSpan = new SnapshotSpan(curSpan.Snapshot, new Span(curLoc, torqueScriptToken.Length));
-						if (tokenSpan.IntersectsWith(curSpan))
-						{
-							yield return new TagSpan<TorqueScriptTokenTag>(tokenSpan, new TorqueScriptTokenTag(_torqueScriptTypes[torqueScriptToken]));
-						}
+						_snapshotCommentsSpans.Add(comment.Span);
 					}
-					curLoc += torqueScriptToken.Length + 1; //add an extra char location because of the space
+					_lastSnapshotVersion = version;
+				}
+
+				foreach (SnapshotSpan test in _snapshotCommentsSpans)
+				{
+					SnapshotSpan? intersect = span.Intersection(test);
+					if(intersect.HasValue)
+					{
+						yield return new TagSpan<TorqueScriptTokenTag>(intersect.Value, new TorqueScriptTokenTag(TorqueScriptTokenTypes.TorqueScriptComment));
+					}
+				}
+
+				var tags = _language.findQuoted(span);
+				foreach (ITagSpan<TorqueScriptTokenTag> tag in tags)
+				{
+					if (!IsIntersectsWithComments(tag))
+					{
+						yield return tag;
+					}
+				}
+				tags = _language.findKeywords(span);
+				foreach (ITagSpan<TorqueScriptTokenTag> tag in tags)
+				{
+					if (!IsIntersectsWithComments(tag))
+					{
+						yield return tag;
+					}
+				}
+				tags = _language.findOperators(span);
+				foreach (ITagSpan<TorqueScriptTokenTag> tag in tags)
+				{
+					if (!IsIntersectsWithComments(tag))
+					{
+						yield return tag;
+					}
 				}
 			}
 		}

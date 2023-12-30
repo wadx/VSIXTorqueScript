@@ -8,9 +8,9 @@ namespace TorqueScriptLanguage
 {
 	public enum TorqueScriptTokenTypes
 	{
-		TorqueScriptFunction,
-		TorqueScriptNew,
-		TorqueScriptSingleton,
-		TorqueScriptDatablock
+		TorqueScriptComment,
+		TorqueScriptQuoted,
+		TorqueScriptKeyword,
+		TorqueScriptOperator
 	}
 }
