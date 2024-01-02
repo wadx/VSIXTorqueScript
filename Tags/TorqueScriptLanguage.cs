@@ -87,19 +87,18 @@ namespace TorqueScriptLanguage
 			_operators.Add(new Regex(@"(\b|^|\s)<<(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
 			_operators.Add(new Regex(@"(\b|^|\s)<<\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
 			_operators.Add(new Regex(@"(\b|^|\s)<\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled)); // [^=!<>]=[^=]
 			_operators.Add(new Regex(@"(\b|^|\s)\-\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\=\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
 			_operators.Add(new Regex(@"(\b|^|\s)>(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
 			_operators.Add(new Regex(@"(\b|^|\s)>\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
 			_operators.Add(new Regex(@"(\b|^|\s)>>(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
 			_operators.Add(new Regex(@"(\b|^|\s)>>\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
+			_operators.Add(new Regex(@"([\%|\$]\w+|^|\s)==([\%|\$]\w+|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
+			_operators.Add(new Regex(@"([\%|\$]\w+|^|\s)=([\%|\$]\w+|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled)); // [^=!<>]=[^=]
 
 			//_operators.Add(new Regex(@"^[-+(]*[[:digit:]]+[)]*([-+*/][-+(]*[[:digit:]]+[)]*)*$", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
 			//_operators.Add(new Regex(@"(?<=[-+*\/^()])|(?=[-+*\/^()])", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
 
-			_variables.Add(new Regex(@"\%\w+", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_variables.Add(new Regex(@"\$\w+", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
+			_variables.Add(new Regex(@"[\%|\$]\w+", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
 		}
 		public IEnumerable<ITagSpan<TorqueScriptTokenTag>> findComments(SnapshotSpan span)
 		{
