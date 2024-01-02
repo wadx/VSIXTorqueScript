@@ -19,7 +19,7 @@ namespace TorqueScriptLanguage
 		private List<Regex> _quoted = new List<Regex>();
 		private List<Regex> _keywords = new List<Regex>();
 		private List<Regex> _operators = new List<Regex>();
-
+		private List<Regex> _variables = new List<Regex>();
 		#endregion // Member Variables
 
 		#region ctor
@@ -97,7 +97,9 @@ namespace TorqueScriptLanguage
 
 			//_operators.Add(new Regex(@"^[-+(]*[[:digit:]]+[)]*([-+*/][-+(]*[[:digit:]]+[)]*)*$", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
 			//_operators.Add(new Regex(@"(?<=[-+*\/^()])|(?=[-+*\/^()])", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			
+
+			_variables.Add(new Regex(@"\%\w+", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
+			_variables.Add(new Regex(@"\$\w+", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
 		}
 		public IEnumerable<ITagSpan<TorqueScriptTokenTag>> findComments(SnapshotSpan span)
 		{
@@ -129,7 +131,6 @@ namespace TorqueScriptLanguage
 				}
 			}
 		}
-
 		public IEnumerable<ITagSpan<TorqueScriptTokenTag>> findKeywords(SnapshotSpan span)
 		{
 			string str = span.GetText();
@@ -145,7 +146,6 @@ namespace TorqueScriptLanguage
 				}
 			}
 		}
-
 		public IEnumerable<ITagSpan<TorqueScriptTokenTag>> findOperators(SnapshotSpan span)
 		{
 			string str = span.GetText();
@@ -158,6 +158,21 @@ namespace TorqueScriptLanguage
 					Span new_span = new Span(span.Start.Position + match.Index, match.Length);
 					SnapshotSpan tokenSpan = new SnapshotSpan(span.Snapshot, new_span);
 					yield return new TagSpan<TorqueScriptTokenTag>(tokenSpan, new TorqueScriptTokenTag(TorqueScriptTokenTypes.TorqueScriptOperator));
+				}
+			}
+		}
+		public IEnumerable<ITagSpan<TorqueScriptTokenTag>> findVariables(SnapshotSpan span)
+		{
+			string str = span.GetText();
+			foreach (var item in _variables)
+			{
+				var matches = item.Matches(str);
+				for (int i = 0; i < matches.Count; i++)
+				{
+					Match match = matches[i];
+					Span new_span = new Span(span.Start.Position + match.Index, match.Length);
+					SnapshotSpan tokenSpan = new SnapshotSpan(span.Snapshot, new_span);
+					yield return new TagSpan<TorqueScriptTokenTag>(tokenSpan, new TorqueScriptTokenTag(TorqueScriptTokenTypes.TorqueScriptVariable));
 				}
 			}
 		}

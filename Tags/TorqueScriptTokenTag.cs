@@ -23,7 +23,6 @@ namespace TorqueScriptLanguage
 			return new TorqueScriptTokenTagger(buffer) as ITagger<T>;
 		}
 	}
-
 	public class TorqueScriptTokenTag : ITag 
 	{
 		public TorqueScriptTokenTypes type { get; private set; }
@@ -33,16 +32,14 @@ namespace TorqueScriptLanguage
 			this.type = type;
 		}
 	}
-
 	internal sealed class TorqueScriptTokenTagger : ITagger<TorqueScriptTokenTag>
 	{
-		TorqueScriptLanguage _language;
-		int _lastSnapshotVersion = -1;
-		List<SnapshotSpan> _snapshotCommentsSpans = new List<SnapshotSpan>();
+		TorqueScriptLanguage _language = new TorqueScriptLanguage();
+		int                  _lastSnapshotVersion = -1;
+		List<SnapshotSpan>   _snapshotCommentsSpans = new List<SnapshotSpan>();
 
 		internal TorqueScriptTokenTagger(ITextBuffer buffer)
 		{
-			_language = new TorqueScriptLanguage();
 		}
 
 		public event EventHandler<SnapshotSpanEventArgs> TagsChanged
@@ -107,6 +104,14 @@ namespace TorqueScriptLanguage
 					}
 				}
 				tags = _language.findOperators(span);
+				foreach (ITagSpan<TorqueScriptTokenTag> tag in tags)
+				{
+					if (!IsIntersectsWithComments(tag))
+					{
+						yield return tag;
+					}
+				}
+				tags = _language.findVariables(span);
 				foreach (ITagSpan<TorqueScriptTokenTag> tag in tags)
 				{
 					if (!IsIntersectsWithComments(tag))

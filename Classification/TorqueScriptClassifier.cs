@@ -12,7 +12,6 @@ namespace TorqueScriptLanguage
 	using Microsoft.VisualStudio.Utilities;
 	using Microsoft.VisualStudio.Language.StandardClassification;
 
-
 	[Export(typeof(ITaggerProvider))]
 	[ContentType("TorqueScript")]
 	[TagType(typeof(ClassificationTag))]
@@ -26,7 +25,7 @@ namespace TorqueScriptLanguage
 		[Export]
 		[FileExtension(".tscript")]
 		[ContentType("TorqueScript")]
-		internal static FileExtensionToContentTypeDefinition TorqueScriptFileTypeCS = null;
+		internal static FileExtensionToContentTypeDefinition TorqueScriptFileTypeTScript = null;
 
 		[Export]
 		[FileExtension(".gui")]
@@ -45,21 +44,19 @@ namespace TorqueScriptLanguage
 			return new TorqueScriptClassifier(buffer, torqueScriptTagAggregator, classificationTypeRegistry) as ITagger<T>;
 		}
 	}
-
 	internal sealed class TorqueScriptClassifier : ITagger<ClassificationTag>
 	{
-		ITextBuffer                                              _buffer;
 		ITagAggregator<TorqueScriptTokenTag>                     _aggregator;
 		IDictionary<TorqueScriptTokenTypes, IClassificationType> _torqueScriptTypes;
 		internal TorqueScriptClassifier(ITextBuffer buffer, ITagAggregator<TorqueScriptTokenTag> torqueScriptTagAggregator, IClassificationTypeRegistryService typeService)
 		{
-			_buffer = buffer;
 			_aggregator = torqueScriptTagAggregator;
 			_torqueScriptTypes = new Dictionary<TorqueScriptTokenTypes, IClassificationType>();
 			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptOperator] = typeService.GetClassificationType(PredefinedClassificationTypeNames.Operator);
 			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptComment] = typeService.GetClassificationType(PredefinedClassificationTypeNames.Comment);
 			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptQuoted] = typeService.GetClassificationType(PredefinedClassificationTypeNames.String);
-			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptKeyword] = typeService.GetClassificationType(PredefinedClassificationTypeNames.Keyword);// typeService.GetClassificationType("key_word");
+			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptVariable] = typeService.GetClassificationType(PredefinedClassificationTypeNames.Identifier);
+			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptKeyword] = typeService.GetClassificationType(PredefinedClassificationTypeNames.Keyword);
 		}
 
 		public event EventHandler<SnapshotSpanEventArgs> TagsChanged
