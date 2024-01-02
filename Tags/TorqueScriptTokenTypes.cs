@@ -12,6 +12,7 @@ namespace TorqueScriptLanguage
 		TorqueScriptQuoted,
 		TorqueScriptKeyword,
 		TorqueScriptOperator,
-		TorqueScriptVariable
+		TorqueScriptVariable,
+		TorqueScriptValue
 	}
 }

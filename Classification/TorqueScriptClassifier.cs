@@ -57,6 +57,7 @@ namespace TorqueScriptLanguage
 			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptQuoted] = typeService.GetClassificationType(PredefinedClassificationTypeNames.String);
 			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptVariable] = typeService.GetClassificationType(PredefinedClassificationTypeNames.Identifier);
 			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptKeyword] = typeService.GetClassificationType(PredefinedClassificationTypeNames.Keyword);
+			_torqueScriptTypes[TorqueScriptTokenTypes.TorqueScriptValue] = typeService.GetClassificationType(PredefinedClassificationTypeNames.Number);
 		}
 
 		public event EventHandler<SnapshotSpanEventArgs> TagsChanged

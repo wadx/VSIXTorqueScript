@@ -38,67 +38,38 @@ namespace TorqueScriptLanguage
 
 			_quoted.Add(new Regex(@"([""'])(?:\\\1|.)*?\1", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
 
-			_keywords.Add(new Regex(@"\bbreak\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bcase\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bcontinue\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bdatablock\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bdefault\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\belse\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bfalse\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bfor\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bfunction\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bif\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\blocal\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bnew\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bor\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bpackage\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\breturn\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bsingleton\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bswitch\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bswitch$\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\btrue\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_keywords.Add(new Regex(@"\bwhile\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bbreak\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bcase\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bcontinue\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bdatablock\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bdefault\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\belse\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bfalse\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bfor\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bfunction\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bif\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\blocal\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bnew\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bor\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bpackage\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\breturn\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bsingleton\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bswitch\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bswitch$\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\btrue\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_keywords.Add(new Regex(@"\bwhile\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
 
-			_operators.Add(new Regex(@"(\b|^|\s)\!(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\!\$\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\!\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\-(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\-\-(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\$\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)%(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)%\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)&(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)&&(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)&\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\*(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\*\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\/(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\/\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)@(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\^(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\^\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\|(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\|\|(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\|\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\+(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\+\+(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\+\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)<(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)<<(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)<<\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)<\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)\-\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)>(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)>\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)>>(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"(\b|^|\s)>>\=(\b|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"([\%|\$]\w+|^|\s)==([\%|\$]\w+|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			_operators.Add(new Regex(@"([\%|\$]\w+|^|\s)=([\%|\$]\w+|$|\s)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled)); // [^=!<>]=[^=]
+			_operators.Add(new Regex(@"@|SPC|TAB|NL", RegexOptions.Compiled));
+			_operators.Add(new Regex(@"(!|&&|\|\| or )", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_operators.Add(new Regex(@"(\\+|\-|\*|\/|%| or |\&|\||\^|<<|>>)=", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_operators.Add(new Regex(@"(\~|\&|\||\^|<<|>>| or )", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_operators.Add(new Regex(@"(<|>|<=|>=|==| or |!=|\$=|!\$=)", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_operators.Add(new Regex(@"(\-|\+|\*|\/|%|\+\+|\-\-)", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_operators.Add(new Regex(@"=", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_operators.Add(new Regex(@"::", RegexOptions.IgnoreCase | RegexOptions.Compiled));
 
-			//_operators.Add(new Regex(@"^[-+(]*[[:digit:]]+[)]*([-+*/][-+(]*[[:digit:]]+[)]*)*$", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-			//_operators.Add(new Regex(@"(?<=[-+*\/^()])|(?=[-+*\/^()])", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
-
-			_variables.Add(new Regex(@"[\%|\$]\w+", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled));
+			_variables.Add(new Regex(@"\$[a-zA-Z_][0-9a-zA-Z_]*(:+[0-9a-zA-Z_]+)*\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
+			_variables.Add(new Regex(@"\%[a-zA-Z_][0-9a-zA-Z_]*(:+[0-9a-zA-Z_]+)*\b", RegexOptions.IgnoreCase | RegexOptions.Compiled));
 		}
 		public IEnumerable<ITagSpan<TorqueScriptTokenTag>> findComments(SnapshotSpan span)
 		{
@@ -173,6 +144,83 @@ namespace TorqueScriptLanguage
 					SnapshotSpan tokenSpan = new SnapshotSpan(span.Snapshot, new_span);
 					yield return new TagSpan<TorqueScriptTokenTag>(tokenSpan, new TorqueScriptTokenTag(TorqueScriptTokenTypes.TorqueScriptVariable));
 				}
+			}
+		}
+		public IEnumerable<ITagSpan<TorqueScriptTokenTag>> findTags(SnapshotSpan span)
+		{
+			string line = span.GetText();
+			int variableBegin = -1;
+			int valueBegin = -1;
+			int operatorBegin = -1;
+			List<ITagSpan<TorqueScriptTokenTag>> outSpans = new List<ITagSpan<TorqueScriptTokenTag>>();
+
+			var createSpan = (int frompos, int pos, TorqueScriptTokenTypes type) =>
+			{
+				Span new_span = new Span(span.Start.Position + frompos, pos);
+				SnapshotSpan tokenSpan = new SnapshotSpan(span.Snapshot, new_span);
+				outSpans.Add(new TagSpan<TorqueScriptTokenTag>(tokenSpan, new TorqueScriptTokenTag(type)));
+			};
+
+			for (int pos = 0; pos < line.Length; pos++)
+			{
+				char c = line[pos];
+				char c2 = pos + 1 < line.Length ? line[pos + 1] : '\0';
+
+				if (c == '%' || c == '$')
+				{
+					if (Char.IsLetter(c2))
+					{
+						if (variableBegin == -1)
+						{
+							variableBegin = pos;
+						}
+					}
+					else if (operatorBegin == -1)
+					{
+						operatorBegin = pos;
+					}
+				}
+				if (Char.IsDigit(c))
+				{
+					if (valueBegin == -1)
+					{
+						valueBegin = pos;
+					}
+				}
+				if (Char.IsWhiteSpace(c) || c == ';')
+				{
+					if (variableBegin != -1)
+					{
+						createSpan(variableBegin, pos, TorqueScriptTokenTypes.TorqueScriptVariable);
+						variableBegin = -1;
+					}
+					if (valueBegin != -1)
+					{
+						createSpan(valueBegin, pos, TorqueScriptTokenTypes.TorqueScriptValue);
+						valueBegin = -1;
+					}
+					if (operatorBegin != -1)
+					{
+						createSpan(operatorBegin, pos, TorqueScriptTokenTypes.TorqueScriptOperator);
+						operatorBegin = -1;
+					}
+				}
+				if (c == '=' || c == '+' || c == '-' || c == '/' || c == '!' || c == '&' || c == '|' || c == '^')
+				{
+					if (variableBegin != -1)
+					{
+						createSpan(variableBegin, pos, TorqueScriptTokenTypes.TorqueScriptVariable);
+						variableBegin = -1;
+					}
+					if (operatorBegin == -1)
+					{
+						operatorBegin = pos;
+					}
+				}
+			}
+			foreach(var outSpan in outSpans)
+			{
+				yield return outSpan;
 			}
 		}
 
