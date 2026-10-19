@@ -40,6 +40,7 @@ namespace TorqueScriptLanguage
 
 		public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
 		{
+			FileIconRegistrar.Register();
 			ITagAggregator<TorqueScriptTokenTag> torqueScriptTagAggregator = aggregatorFactory.CreateTagAggregator<TorqueScriptTokenTag>(buffer);
 			return new TorqueScriptClassifier(buffer, torqueScriptTagAggregator, classificationTypeRegistry) as ITagger<T>;
 		}

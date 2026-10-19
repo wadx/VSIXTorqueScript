@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/VisualStudio/ImageManifestSchema/2014">
+  <Symbols>
+    <String Name="TorqueScriptImagesGuid" Value="{9A5A9B8D-4709-4D0A-BB19-FAF82A16CAF4}" />
+    <Guid ID="IconGuid" Value="$(TorqueScriptImagesGuid)" />
+    <ID Name="FileIconID" Value="1" />
+  </Symbols>
+  <Images>
+    <Image Guid="$(IconGuid)" ID="$(FileIconID)">
+      <Source Uri="TorqueScriptIcon.png">
+        <Size Value="16" />
+      </Source>
+    </Image>
+  </Images>
+</ImageManifest>

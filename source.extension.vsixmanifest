@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="TorqueScript.0c69b720-a069-447e-a8ab-4564733bf038" Version="1.1" Language="en-US" Publisher="wadx" />
+        <Identity Id="TorqueScript.0c69b720-a069-447e-a8ab-4564733bf038" Version="1.2" Language="en-US" Publisher="wadx" />
         <DisplayName>TorqueScript</DisplayName>
         <Description xml:space="preserve">TorqueScript</Description>
     </Metadata>
@@ -19,5 +19,7 @@
     </Prerequisites>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%|" />
+        <Asset Type="Microsoft.VisualStudio.ImageManifest" d:Source="File" Path="TorqueScriptImages.imagemanifest" />
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="File" Path="TorqueScript.pkgdef" />
     </Assets>
 </PackageManifest>
